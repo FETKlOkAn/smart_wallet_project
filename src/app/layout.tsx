@@ -6,8 +6,11 @@ import '@coinbase/onchainkit/styles.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import dynamic from 'next/dynamic';
 
+// Import the Web3ModalProvider
+import { Web3ModalProvider } from '../lib/web3modalConfig'; // Adjust the path if needed
+
 const OnchainProviders = dynamic(
-  () => import('src/components/OnchainProviders'),
+  () => import('../components/OnchainProviders'),
   {
     ssr: false,
   },
@@ -34,7 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex items-center justify-center">
-        <OnchainProviders>{children}</OnchainProviders>
+        <Web3ModalProvider>
+          <OnchainProviders>
+            {children}
+          </OnchainProviders>
+        </Web3ModalProvider>
       </body>
     </html>
   );
